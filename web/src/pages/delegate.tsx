@@ -3,48 +3,36 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 import styles from 'styles/Page.module.css';
 
-const CastVote: NextPage = () => {
+const Delegate: NextPage = () => {
 	const [formData, setFormData] = useState({
-		proposal: '',
-		amount: '',
+		address: '',
 	});
+
+	const [success, setSuccess] = useState(false);
 
 	const onSubmit = async () => {
 		await axios({
 			method: 'post',
-			url: 'http://localhost:3000/cast-vote',
+			url: 'http://localhost:3000/delegate',
 			data: formData,
 		});
 	};
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.description}>Cast a vote!</p>
-
+			<p className={styles.description}>Delegate a vote!</p>
+			<p>Transaction status: {success && 'Success'}</p>
 			<div className={styles.grid}>
 				<div className={styles.card}>
-					<h2>Cast Vote &rarr;</h2>
+					<h2>Delegate Vote &rarr;</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					<form>
 						<p>
 							<label>
-								Proposal index:{' '}
+								Delegee Address:{' '}
 								<input
-									onChange={(e) =>
-										setFormData({ ...formData, proposal: e.target.value })
-									}
-									type='number'
-								/>
-							</label>
-						</p>
-						<p>
-							<label>
-								Vote amount:{' '}
-								<input
-									onChange={(e) =>
-										setFormData({ ...formData, amount: e.target.value })
-									}
-									type='number'
+									onChange={(e) => setFormData({ address: e.target.value })}
+									type='text'
 								/>
 							</label>
 						</p>
@@ -58,4 +46,4 @@ const CastVote: NextPage = () => {
 	);
 };
 
-export default CastVote;
+export default Delegate;
