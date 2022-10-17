@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import { ethers } from 'ethers'
-import * as dotenv from 'dotenv'
-dotenv.config()
+
+import {} from 'dotenv/config'
 
 import * as TokenizedBallotJson from './assets/TokenizedBallot.json'
 import * as ERC20VotesJson from './assets/ERC20Votes.json'
 
 // Cri's ballot contract from week 3
-const BALLOT_CONTRACT_ADDRESS = '0x8A6A405041FFE6C09DE84cB74cEE5b5767D2C2BE'
-const TOKEN_CONTRACT_ADDRESS = ''
+const BALLOT_CONTRACT_ADDRESS = '0x6F1a34636A572A1BacCa073d3cF93270ec7C2287'
+const TOKEN_CONTRACT_ADDRESS = '0xFEAa7D23E7F4c86017C7973aB135592C2FD95AeF'
 
 export interface CastVoteDTO {
   proposal: string
@@ -36,7 +36,7 @@ export class AppService {
   constructor() {
     this.provider = ethers.getDefaultProvider('goerli', options)
     // TODO: Set up signer. Attempted implementation below.
-    this.wallet = new ethers.Wallet(process.env.PRIVATE_KEY)
+    this.wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? '')
     this.signer = this.wallet.connect(this.provider)
 
     this.tokenContract = new ethers.Contract(
@@ -52,12 +52,16 @@ export class AppService {
     )
   }
 
-  async mint(to: string, amount: number) {
-    console.log(`Minting ${amount} tokens to ${to}`)
-    const mintTx = await this.tokenContract.mint(to, amount)
+  async mint(address: string, amount: number) {
+    console.log('signer: ', this.signer)
+    const signedContract = this.tokenContract.connect(this.signer)
+    console.log(`Minting ${amount} tokens to ${address}`)
+    const mintTx = await signedContract.mint(address, amount)
     await mintTx.wait()
-    const balance = await this.tokenContract.balanceOf(to)
-    console.log(`Minted ${amount} tokens to ${to}. Balance is now ${balance}`)
+    const balance = await this.tokenContract.balanceOf(address)
+    console.log(
+      `Minted ${amount} tokens to ${address}. Balance is now ${balance}`,
+    )
   }
 
   async castVote(body: CastVoteDTO) {
@@ -87,8 +91,10 @@ export class AppService {
 
   async queryWinner() {
     console.log('Query winning proposal')
+
     const winningProposal = await this.ballotContract.winnerName()
     const name = ethers.utils.parseBytes32String(winningProposal)
+    console.error('No winning proposal yet', name)
     return name
   }
 }
