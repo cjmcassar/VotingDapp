@@ -25,7 +25,7 @@ const Delegate: NextPage = () => {
 			<div className={styles.grid}>
 				<div className={styles.card}>
 					<h2>Delegate Vote &rarr;</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					<p></p>
 					<form>
 						<p>
 							<label>

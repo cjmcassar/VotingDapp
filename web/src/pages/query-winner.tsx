@@ -19,7 +19,7 @@ const QueryWinner: NextPage = () => {
 			<div className={styles.grid}>
 				<div className={styles.card}>
 					<h2>Query Winner &rarr;</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					<p></p>
 					<button onClick={onSubmit}>Query</button>
 				</div>
 			</div>
