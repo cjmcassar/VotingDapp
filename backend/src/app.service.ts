@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { ethers } from 'ethers'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 import * as TokenizedBallotJson from './assets/TokenizedBallot.json'
 
@@ -24,15 +26,16 @@ const options = {
 export class AppService {
   provider: ethers.providers.Provider
   // TODO: Provide types for wallet and signer. Attempted implementation below.
-  // wallet: ethers.Wallet
-  // signer: ethers.Signer
+  wallet: ethers.Wallet
+  signer: ethers.Signer
   contract: ethers.Contract
 
   constructor() {
     this.provider = ethers.getDefaultProvider('goerli', options)
     // TODO: Set up signer. Attempted implementation below.
-    // this.wallet = ethers.Wallet.fromMnemonic(process.env.MNEMONIC ?? '')
-    // this.signer = this.wallet.connect(this.provider)
+    this.wallet = new ethers.Wallet(process.env.PRIVATE_KEY)
+    this.signer = this.wallet.connect(this.provider)
+
     this.contract = new ethers.Contract(
       CONTRACT_ADDRESS,
       TokenizedBallotJson.abi,
