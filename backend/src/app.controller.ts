@@ -5,6 +5,11 @@ import { AppService, CastVoteDTO, DelegateDTO } from './app.service'
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Post('mint')
+  mint(@Body() body: { to: string; amount: number }) {
+    return this.appService.mint(body.to, body.amount)
+  }
+
   @Post('cast-vote')
   castVote(@Body() body: CastVoteDTO) {
     return this.appService.castVote(body)
