@@ -1,9 +1,11 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styles from 'styles/Page.module.css';
 
 const Delegate: NextPage = () => {
+	const router = useRouter();
 	const [formData, setFormData] = useState({
 		address: '',
 	});
@@ -38,6 +40,12 @@ const Delegate: NextPage = () => {
 						</p>
 						<p>
 							<button onClick={onSubmit}>Submit</button>
+							<button
+								onClick={() => router.push('/')}
+								style={{ marginLeft: '45px' }}
+							>
+								Back
+							</button>
 						</p>
 					</form>
 				</div>

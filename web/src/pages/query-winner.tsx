@@ -1,9 +1,11 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styles from 'styles/Page.module.css';
 
 const QueryWinner: NextPage = () => {
+	const router = useRouter();
 	const [winnerName, setWinnerName] = useState('');
 
 	const onSubmit = async () => {
@@ -21,6 +23,12 @@ const QueryWinner: NextPage = () => {
 					<h2>Query Winner &rarr;</h2>
 					<p></p>
 					<button onClick={onSubmit}>Query</button>
+					<button
+						onClick={() => router.push('/')}
+						style={{ marginLeft: '45px' }}
+					>
+						Back
+					</button>
 				</div>
 			</div>
 		</div>

@@ -1,21 +1,22 @@
-import React from "react";
-import axios from "axios";
-import type { NextPage } from "next";
-import { useState } from "react";
-import styles from "styles/Page.module.css";
+import React from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import styles from 'styles/Page.module.css';
 
 const MintTokens = () => {
+	const router = useRouter();
 	const [formData, setFormData] = useState({
-		address: "",
-		amount: "",
+		address: '',
+		amount: '',
 	});
 
 	const [success, setSuccess] = useState(false);
 
 	const onSubmit = async () => {
 		await axios({
-			method: "post",
-			url: "http://localhost:3000/mint-tokens",
+			method: 'post',
+			url: 'http://localhost:3000/mint-tokens',
 			data: formData,
 		});
 	};
@@ -32,28 +33,34 @@ const MintTokens = () => {
 						<form>
 							<p>
 								<label>
-									Amount:{" "}
+									Amount:{' '}
 									<input
 										onChange={(e) =>
 											setFormData({ ...formData, amount: e.target.value })
 										}
-										type="text"
+										type='text'
 									/>
 								</label>
 							</p>
 							<p>
 								<label>
-									Address:{" "}
+									Address:{' '}
 									<input
 										onChange={(e) =>
 											setFormData({ ...formData, address: e.target.value })
 										}
-										type="text"
+										type='text'
 									/>
 								</label>
 							</p>
 							<p>
 								<button onClick={onSubmit}>Submit</button>
+								<button
+									onClick={() => router.push('/')}
+									style={{ marginLeft: '45px' }}
+								>
+									Back
+								</button>
 							</p>
 						</form>
 					</div>
