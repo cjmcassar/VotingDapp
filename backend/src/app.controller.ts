@@ -6,8 +6,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('mint')
-  mint(@Body() body: { to: string; amount: number }) {
-    return this.appService.mint(body.to, body.amount)
+  mint(@Body() body: { address: string; amount: number }) {
+    return this.appService.mint(body.address, body.amount)
   }
 
   @Post('cast-vote')
