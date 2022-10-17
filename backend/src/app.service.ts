@@ -52,16 +52,14 @@ export class AppService {
     )
   }
 
-  async mint(address: string, amount: number) {
+  async mint(to: string, amount: number) {
     console.log('signer: ', this.signer)
     const signedContract = this.tokenContract.connect(this.signer)
-    console.log(`Minting ${amount} tokens to ${address}`)
-    const mintTx = await signedContract.mint(address, amount)
+    console.log(`Minting ${amount} tokens to ${to}`)
+    const mintTx = await signedContract.mint(to, amount)
     await mintTx.wait()
-    const balance = await this.tokenContract.balanceOf(address)
-    console.log(
-      `Minted ${amount} tokens to ${address}. Balance is now ${balance}`,
-    )
+    const balance = await this.tokenContract.balanceOf(to)
+    console.log(`Minted ${amount} tokens to ${to}. Balance is now ${balance}`)
   }
 
   async castVote(body: CastVoteDTO) {
@@ -77,7 +75,10 @@ export class AppService {
 
   async delegate(body: DelegateDTO) {
     // TODO: Find fix for delegate. TokenizedBallot.json abi doesn't have a delegate method.
-    const delegateTx = await this.tokenContract.delegate(body.address)
+    console.log('signer: ', this.signer)
+    const signedContract = this.tokenContract.connect(this.signer)
+
+    const delegateTx = await signedContract.delegate(body.address)
     await delegateTx.wait()
     const votesAfterDelegate = await this.tokenContract.getVotes(body.address)
     console.log(
