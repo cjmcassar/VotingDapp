@@ -22,12 +22,6 @@ getBallotContractAddress() {
   return {result};
 }
 
-@Get('get-wallet-address')
-walletAddress() {
-  const result = this.appService.walletAddress();
-  return {result};
-}
-
 @Get('query-winner')
 getWinner(){
   const result = this.appService.getWinner();

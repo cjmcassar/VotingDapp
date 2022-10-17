@@ -5,7 +5,6 @@ import * as BallotJson from './assets/tokenizedBallot.json'
 import { ContractFactory } from 'ethers';
 
 const TOKEN_CONTRACT_ADDRESS = '0xf6aD19c2d76F197C573AF32A5b95085Fc34f351f';
-const ADDRESS = "0x6e878B50d3dA403435be5d7CEdD3d4b051792bD7";
 const PROPOSALS = ["Proposal 1", "Proposal 2", "Proposal 3"];
 
 
@@ -56,10 +55,6 @@ export class AppService {
   
   tokenAddress() {
     return TOKEN_CONTRACT_ADDRESS;
-  }
-
-  walletAddress() {
-    return ADDRESS;
   }
 
   getPaymentOrderById(id: string) {
