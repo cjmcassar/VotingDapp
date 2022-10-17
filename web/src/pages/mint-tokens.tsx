@@ -15,7 +15,7 @@ const MintTokens = () => {
 	const onSubmit = async () => {
 		await axios({
 			method: "post",
-			url: "http://localhost:3000/mint",
+			url: "http://localhost:3000/mint-tokens",
 			data: formData,
 		});
 	};
