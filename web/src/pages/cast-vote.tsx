@@ -1,18 +1,18 @@
-import axios from 'axios';
-import type { NextPage } from 'next';
-import { useState } from 'react';
-import styles from 'styles/Page.module.css';
+import axios from "axios";
+import type { NextPage } from "next";
+import { useState } from "react";
+import styles from "styles/Page.module.css";
 
 const CastVote: NextPage = () => {
 	const [formData, setFormData] = useState({
-		proposal: '',
-		amount: '',
+		proposal: "",
+		amount: "",
 	});
 
 	const onSubmit = async () => {
 		await axios({
-			method: 'post',
-			url: 'http://localhost:3000/cast-vote',
+			method: "post",
+			url: "http://localhost:3000/cast-vote",
 			data: formData,
 		});
 	};
@@ -28,23 +28,23 @@ const CastVote: NextPage = () => {
 					<form>
 						<p>
 							<label>
-								Proposal index:{' '}
+								Proposal index:{" "}
 								<input
 									onChange={(e) =>
 										setFormData({ ...formData, proposal: e.target.value })
 									}
-									type='number'
+									type="number"
 								/>
 							</label>
 						</p>
 						<p>
 							<label>
-								Vote amount:{' '}
+								Vote amount:{" "}
 								<input
 									onChange={(e) =>
 										setFormData({ ...formData, amount: e.target.value })
 									}
-									type='number'
+									type="number"
 								/>
 							</label>
 						</p>
