@@ -7,6 +7,7 @@ import styles from "styles/Page.module.css";
 const MintTokens = () => {
 	const [formData, setFormData] = useState({
 		address: "",
+		amount: "",
 	});
 
 	const [success, setSuccess] = useState(false);
@@ -14,7 +15,7 @@ const MintTokens = () => {
 	const onSubmit = async () => {
 		await axios({
 			method: "post",
-			url: "http://localhost:3000/cast-vote",
+			url: "http://localhost:3000/mint",
 			data: formData,
 		});
 	};
@@ -31,9 +32,22 @@ const MintTokens = () => {
 						<form>
 							<p>
 								<label>
+									Amount:{" "}
+									<input
+										onChange={(e) =>
+											setFormData({ ...formData, amount: e.target.value })
+										}
+										type="text"
+									/>
+								</label>
+							</p>
+							<p>
+								<label>
 									Address:{" "}
 									<input
-										onChange={(e) => setFormData({ address: e.target.value })}
+										onChange={(e) =>
+											setFormData({ ...formData, address: e.target.value })
+										}
 										type="text"
 									/>
 								</label>
