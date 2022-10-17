@@ -23,31 +23,31 @@ const Home: NextPage = () => {
 
 				<div className={styles.grid}>
 					<div
+						onClick={() => router.push("/mint-tokens")}
+						className={styles.card}
+					>
+						<h2>1. Mint Tokens &rarr;</h2>
+						<p>Tokens represent voting weight.</p>
+					</div>
+					<div onClick={() => router.push("/delegate")} className={styles.card}>
+						<h2>2. Delegate Vote &rarr;</h2>
+						<p>Self-delegate to activate your voting power.</p>
+					</div>
+					<div
 						onClick={() => router.push("/cast-vote")}
 						className={styles.card}
 					>
-						<h2>Cast Vote &rarr;</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<h2>3. Cast Vote &rarr;</h2>
+						<p>Vote for your favorite proposal using tokens.</p>
 					</div>
 
-					<div onClick={() => router.push("/delegate")} className={styles.card}>
-						<h2>Delegate Vote &rarr;</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
 
 					<div
 						onClick={() => router.push("/query-winner")}
 						className={styles.card}
 					>
-						<h2>Query Winner &rarr;</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
-					<div
-						onClick={() => router.push("/mint-tokens")}
-						className={styles.card}
-					>
-						<h2>Mint Tokens &rarr;</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<h2>4. Query Winner &rarr;</h2>
+						<p>Find out which proposal won!</p>
 					</div>
 				</div>
 			</main>
