@@ -40,6 +40,14 @@ export class AppService {
     )
   }
 
+  async mint(to: string, amount: number) {
+    console.log(`Minting ${amount} tokens to ${to}`)
+    const mintTx = await this.contract.mint(to, amount)
+    await mintTx.wait()
+    const balance = await this.contract.balanceOf(to)
+    console.log(`Minted ${amount} tokens to ${to}. Balance is now ${balance}`)
+  }
+
   async castVote(body: CastVoteDTO) {
     // TODO: Pass in signer to contract/transaction. Currently errors saying: 'Error: sending a transaction requires a signer'
     console.log('casting vote')
